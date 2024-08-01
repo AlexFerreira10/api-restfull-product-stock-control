@@ -10,6 +10,9 @@ public record RegisterProductDto(
         @NotBlank(message = "The name field can't be empty")
         String name,
 
+        @NotNull(message = "The batch field can't be empty")
+        Integer batch,
+
         @NotNull(message = "The quantify field can't be empty")
         Integer quantify,
 

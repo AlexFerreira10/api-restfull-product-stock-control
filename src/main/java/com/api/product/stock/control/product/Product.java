@@ -19,6 +19,9 @@ public class Product {
     @Id
     private Long id;
 
+    @Column(name = "batch")
+    private Integer batch;
+
     @Column(name = "name")
     private String name;
 
@@ -36,6 +39,7 @@ public class Product {
         this.quantify = dados.quantify();
         this.validity = dados.validity();
         this.price = dados.price();
+        this.batch = dados.batch();
     }
 
     @Override

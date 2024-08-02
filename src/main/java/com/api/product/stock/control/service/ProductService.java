@@ -1,5 +1,8 @@
-package com.api.product.stock.control.product;
+package com.api.product.stock.control.service;
 
+import com.api.product.stock.control.product.Product;
+import com.api.product.stock.control.product.ProductRepository;
+import com.api.product.stock.control.product.RegisterProductDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

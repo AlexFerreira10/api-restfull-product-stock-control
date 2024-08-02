@@ -1,0 +1,5 @@
+ALTER TABLE tb_product
+ADD COLUMN active TINYINT;
+
+ALTER TABLE tb_product
+ADD COLUMN supplierEmail VARCHAR(255) NOT NULL UNIQUE;

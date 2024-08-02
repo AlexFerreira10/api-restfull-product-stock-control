@@ -2,14 +2,17 @@ package com.api.product.stock.control.controller;
 
 import com.api.product.stock.control.product.DataProductDto;
 import com.api.product.stock.control.product.Product;
-import com.api.product.stock.control.product.ProductService;
+import com.api.product.stock.control.service.EmailService;
+import com.api.product.stock.control.service.ProductService;
 import com.api.product.stock.control.product.RegisterProductDto;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +23,14 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping("/create")
-    public ResponseEntity<DataProductDto> create (@RequestBody @Valid RegisterProductDto dto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DataProductDto> create (@RequestBody @Valid RegisterProductDto dto, UriComponentsBuilder uriBuilder) throws MessagingException, UnsupportedEncodingException {
         Product product = service.insert(dto);
+
+        emailService.sendMail(product);
 
         var uri = uriBuilder.path("/product").buildAndExpand(product.getId()).toUri();
 

@@ -20,6 +20,9 @@ public record RegisterProductDto(
         LocalDate validity,
 
         @NotNull(message = "The price field can't be empty")
-        Double price
+        Double price,
+
+        @NotBlank(message = "The supplier email field can't be empty")
+        String supplierEmail
 ) {
 }

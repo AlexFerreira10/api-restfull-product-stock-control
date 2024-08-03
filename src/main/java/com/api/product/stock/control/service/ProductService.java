@@ -22,6 +22,9 @@ public class ProductService {
         if(repository.findByBatch(data.batch()) != null) {
             throw new DataIntegrityViolationException("Integrity Error: Batch already exists");
         }
+        if(repository.findByBatch(data.batch()) != null) {
+            throw new DataIntegrityViolationException("Integrity Error: Batch already exists");
+        }
         return repository.save(new Product(data));
     }
 

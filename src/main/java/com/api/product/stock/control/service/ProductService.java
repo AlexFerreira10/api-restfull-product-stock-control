@@ -29,18 +29,18 @@ public class ProductService {
         return repository.findAll();
     }
 
+    public List<Product> findAllActive() {
+        return findAll().stream().filter(x -> x.getActive().equals(true)).toList();
+    }
+
     public Product findById(Long id) {
-        if(repository.findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Product not found");
-        }
+        launcherEntityNotFoundException(id);
         return repository.getReferenceById(id);
     }
 
     @Transactional
     public Product update(RegisterProductDto data, Long id) {
-        if(repository.findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Product not found");
-        }
+        launcherEntityNotFoundException(id);
         Product product = findById(id);
         updateData(product, data);
         return product;
@@ -48,10 +48,22 @@ public class ProductService {
 
     @Transactional
     public void delete(Long id) {
-        if(repository.findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Product not found");
-        }
+        launcherEntityNotFoundException(id);
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public void inactivate(Long id) {
+        launcherEntityNotFoundException(id);
+        Product product = findById(id);
+        product.setActive(false);
+    }
+
+    @Transactional
+    public void activate (Long id) {
+        launcherEntityNotFoundException(id);
+        Product product = findById(id);
+        product.setActive(true);
     }
 
     private void updateData(Product product, RegisterProductDto data) {
@@ -69,6 +81,13 @@ public class ProductService {
         }
         if(!product.getBatch().equals(data.batch())){
             product.setBatch(data.batch());
+        }
+    }
+
+    // Not found do getReferenceById
+    private void launcherEntityNotFoundException(Long id) {
+        if(repository.findById(id).isEmpty()) {
+            throw new EntityNotFoundException("Product not found");
         }
     }
 }

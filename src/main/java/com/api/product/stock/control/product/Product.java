@@ -49,6 +49,14 @@ public class Product {
         this.supplierEmail = dados.supplierEmail();
     }
 
+    public void actived () {
+        setActive(true);
+    }
+
+    public void inactivated() {
+        setActive(false);
+    }
+
     @Override
     public String toString() {
         return "Product{" +

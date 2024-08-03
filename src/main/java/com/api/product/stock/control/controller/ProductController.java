@@ -58,4 +58,25 @@ public class ProductController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/findAllActive")
+    public ResponseEntity<List<DataProductDto>> findAllActive () {
+        var list = service.findAllActive().stream()
+                .map((Product p) -> new DataProductDto(p.getName(),p.getBatch()))
+                .collect(Collectors.toList());;
+
+        return ResponseEntity.ok(list);
+    }
+
+    @PutMapping("/activate/{id}")
+    public ResponseEntity<Void> activate (@PathVariable Long id) {
+        service.activate(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/inactive/{id}")
+    public ResponseEntity<Void> inactive (@PathVariable Long id) {
+        service.inactivate(id);
+        return ResponseEntity.noContent().build();
+    }
 }

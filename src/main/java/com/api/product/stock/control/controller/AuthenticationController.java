@@ -5,7 +5,6 @@ import com.api.product.stock.control.infra.TokenService;
 import com.api.product.stock.control.user.RegisterAuthenticationDto;
 import com.api.product.stock.control.user.User;
 import jakarta.validation.Valid;
-import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

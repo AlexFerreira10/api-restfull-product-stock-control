@@ -1,10 +1,14 @@
 package com.api.product.stock.control.infra;
 
+import com.api.product.stock.control.service.UserService;
+import com.api.product.stock.control.user.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,10 +21,21 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    UserService userService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var tokenJWT = recoverToken(request);
-        var subject = tokenService.getSubject(tokenJWT);
+
+        if(tokenJWT != null) {
+            var subject = tokenService.getSubject(tokenJWT); // Faz a autenticação do token
+            var user = userService.findByUsername(subject);
+
+            var authorizaion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+            SecurityContextHolder.getContext().setAuthentication(authorizaion);
+        }
 
         filterChain.doFilter(request, response);
     }
@@ -28,10 +43,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
 
-        if (authHeader == null) {
-            throw new RuntimeException();
+        if (authHeader != null) {
+            return authHeader.replace("Bearer ", "");
         }
 
-        return authHeader;
+        return null;
     }
 }

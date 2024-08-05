@@ -1,6 +1,9 @@
 package com.api.product.stock.control.controller;
 
+import com.api.product.stock.control.infra.DataTokenJWTDto;
+import com.api.product.stock.control.infra.TokenService;
 import com.api.product.stock.control.user.RegisterAuthenticationDto;
+import com.api.product.stock.control.user.User;
 import jakarta.validation.Valid;
 import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +23,17 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity<?> doLogin(@RequestBody @Valid RegisterAuthenticationDto data) {
         // Passamos o nosso dto para o dto do Spring
         var token = new UsernamePasswordAuthenticationToken(data.login(),data.password());
         var authentication = manager.authenticate(token); // Precisa ser o dto do Spring
 
-        return ResponseEntity.ok().build();
+        var tokenJWT = tokenService.generateToken((User) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new DataTokenJWTDto(tokenJWT));
     }
 }

@@ -1,9 +1,6 @@
-package com.api.product.stock.control.service;
+package com.api.product.stock.control.product;
 
-import com.api.product.stock.control.product.DataProductDto;
-import com.api.product.stock.control.product.Product;
-import com.api.product.stock.control.product.ProductRepository;
-import com.api.product.stock.control.product.RegisterProductDto;
+import com.api.product.stock.control.infra.EmailService;
 import com.api.product.stock.control.supplier.Supplier;
 import com.api.product.stock.control.supplier.SupplierRepository;
 import jakarta.mail.MessagingException;

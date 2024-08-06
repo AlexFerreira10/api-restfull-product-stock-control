@@ -2,13 +2,13 @@ package com.api.product.stock.control.controller;
 
 import com.api.product.stock.control.product.DataProductDto;
 import com.api.product.stock.control.product.RegisterProductDto;
-import com.api.product.stock.control.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
+import com.api.product.stock.control.product.ProductService;
 
 @RequestMapping("/product")
 @RestController
@@ -29,7 +29,6 @@ public class ProductController {
     @GetMapping("/read")
     public ResponseEntity<List<DataProductDto>> read () {
         var lista = productService.findAll();
-
         return ResponseEntity.ok(lista);
     }
 

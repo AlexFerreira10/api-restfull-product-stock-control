@@ -1,7 +1,6 @@
 package com.api.product.stock.control.infra;
 
-import com.api.product.stock.control.service.UserService;
-import com.api.product.stock.control.user.UserRepository;
+import com.api.product.stock.control.user.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

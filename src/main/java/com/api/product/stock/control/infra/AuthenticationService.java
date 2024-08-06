@@ -1,4 +1,4 @@
-package com.api.product.stock.control.service;
+package com.api.product.stock.control.infra;
 
 import com.api.product.stock.control.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

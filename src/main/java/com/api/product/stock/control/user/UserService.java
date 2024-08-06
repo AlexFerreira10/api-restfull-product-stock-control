@@ -1,7 +1,5 @@
-package com.api.product.stock.control.service;
+package com.api.product.stock.control.user;
 
-import com.api.product.stock.control.user.User;
-import com.api.product.stock.control.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

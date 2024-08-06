@@ -1,4 +1,4 @@
-package com.api.product.stock.control.service;
+package com.api.product.stock.control.infra;
 
 import com.api.product.stock.control.product.Product;
 import jakarta.mail.MessagingException;

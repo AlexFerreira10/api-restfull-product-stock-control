@@ -46,12 +46,12 @@ public class EmailService {
         final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
         final MimeMessageHelper email = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-        email.setTo(product.getSupplierEmail());
+        email.setTo(product.getSupplier().getEmail());
         email.setSubject(MAIL_SUBJECT);
         email.setFrom(new InternetAddress(mailFrom, mailFromName));
 
         final Context ctx = new Context(LocaleContextHolder.getLocale());
-        ctx.setVariable("email", product.getSupplierEmail());
+        ctx.setVariable("email", product.getSupplier().getEmail());
         ctx.setVariable("name", product.getName());
         ctx.setVariable("logo", IMAGE);
         ctx.setVariable("url", confirmationUrl);

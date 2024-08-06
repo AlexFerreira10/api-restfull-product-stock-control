@@ -1,5 +1,6 @@
 package com.api.product.stock.control.product;
 
+import com.api.product.stock.control.supplier.Supplier;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,20 +37,22 @@ public class Product {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "SUPPLIEREMAIL")
-    private String supplierEmail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_supplier")
+    private Supplier supplier;
 
-    public Product(RegisterProductDto dados) {
+
+    public Product(RegisterProductDto dados, Supplier supplier) {
         this.active = true;
         this.name = dados.name();
         this.quantify = dados.quantify();
         this.validity = dados.validity();
         this.price = dados.price();
         this.batch = dados.batch();
-        this.supplierEmail = dados.supplierEmail();
+        this.supplier = supplier;
     }
 
-    public void actived () {
+    public void actived() {
         setActive(true);
     }
 
@@ -61,12 +64,13 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
+                ", batch=" + batch +
                 ", name='" + name + '\'' +
                 ", quantify=" + quantify +
                 ", validity=" + validity +
                 ", price=" + price +
                 ", active=" + active +
-                ", supplierEmail='" + supplierEmail + '\'' +
+                ", supplier=" + supplier +
                 '}';
     }
 }

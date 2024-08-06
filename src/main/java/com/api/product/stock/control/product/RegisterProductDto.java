@@ -22,7 +22,7 @@ public record RegisterProductDto(
         @NotNull(message = "The price field can't be empty")
         Double price,
 
-        @NotBlank(message = "The supplier email field can't be empty")
-        String supplierEmail
+        @NotNull(message = "The id supplier field can't be empty")
+        Long idSupplier
 ) {
 }

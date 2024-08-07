@@ -1,5 +1,6 @@
 package com.api.product.stock.control.supplier;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Table(name = "tb_supplier")
 @Entity(name = "Supplier")
+@Schema(description = "Supplier data model")
 public class Supplier {
 
     @Column(name = "id")

@@ -1,6 +1,7 @@
 package com.api.product.stock.control.product;
 
 import com.api.product.stock.control.supplier.Supplier;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Table(name = "tb_product")
 @Entity(name = "Product")
+@Schema(description = "Product data model")
 public class Product {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
